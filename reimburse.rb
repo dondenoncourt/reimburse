@@ -42,6 +42,15 @@ class Project
   end
 end
 
+class City
+  attr_reader :name, :cost
+
+  def initialize(name, cost)
+    @name = name
+    raise ArgumentError.new("Cost must by 'LOW' or 'HIGH'") unless ['LOW', 'HIGH'].include?(cost)
+    @cost = cost
+  end
+end
 
 require 'date'
 
@@ -61,4 +70,12 @@ describe Project do
   end
 end
 
+describe City do
+  it 'fails when cost is not LOW or HIGH' do
+    expect { City.new('Richmond', 'medium') }.to raise_error(ArgumentError, "Cost must by 'LOW' or 'HIGH'")
+  end
 
+  it 'creates a high cost city' do
+    expect(City.new('New York', 'HIGH').cost).to eq 'HIGH'
+  end
+end
