@@ -24,8 +24,27 @@ describe Itinerary do
     end
 
     it 'builds an empty iterary' do
-      itinerary = Itinerary.new()
-      expect(itinerary.projects.count).to eq 0
+      expect(Itinerary.new().projects.count).to eq 0
+    end
+
+    it 'has 3 days in set 1' do
+      itinerary = Itinerary.new([project1_set1])
+      expect(itinerary.days.count).to eq 3
+    end
+
+    it 'has 9 days in set 2' do
+      itinerary = Itinerary.new([project1_set2, project2_set2, project3_set2])
+      expect(itinerary.days.count).to eq 9
+    end
+
+    it 'has 7 days in set 3' do
+      itinerary = Itinerary.new([project1_set3, project2_set3, project3_set3])
+      expect(itinerary.days.count).to eq 7
+    end
+
+    it 'has 5 days in set 4' do
+      itinerary = Itinerary.new([project1_set4, project2_set4, project3_set4, project4_set4])
+      expect(itinerary.days.count).to eq 5
     end
   end
 
@@ -96,7 +115,3 @@ describe Itinerary do
     end
   end
 end
-
-# add a readme
-# add reimbursement rules
-# do RuboCop fixes
