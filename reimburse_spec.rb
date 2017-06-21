@@ -56,12 +56,12 @@ describe Itinerary do
         expect(itinerary.to_s).to eq ['2015-09-01', '2015-09-02', '2015-09-03']
       end
 
-      it 'each date has an associated city with a Low or High reimbursement rate' do
+      it 'each unique date has a reimbursement rate' do
         reimbursement_rates = itinerary.days.map { |day| day[:project].city.cost }
         expect(reimbursement_rates).to eq %w[LOW LOW LOW]
       end
 
-      it 'each date has an associated city with a Low or High reimbursement rate' do
+      it 'each unique date has a reimbursement rate' do
         expect(itinerary.reimbursements).to eq [45, 75, 45]
       end
     end
@@ -80,12 +80,12 @@ describe Itinerary do
         )
       end
 
-      it 'each date has an associated city with a Low or High reimbursement rate' do
+      it 'each unique date has a reimbursement rate' do
         reimbursement_rates = itinerary.days.map { |day| day[:project].city.cost }
         expect(reimbursement_rates).to eq %w[LOW HIGH HIGH HIGH HIGH HIGH LOW LOW LOW]
       end
 
-      it 'each date has an associated city with a Low or High reimbursement rate' do
+      it 'each unique date has a reimbursement rate' do
         expect(itinerary.reimbursements).to eq [45, 85, 85, 85, 85, 85, 75, 45]
       end
     end
@@ -103,12 +103,12 @@ describe Itinerary do
         )
       end
 
-      it 'each date has an associated city with a Low or High reimbursement rate' do
+      it 'each unique date has a reimbursement rate' do
         reimbursement_rates = itinerary.days.map { |day| day[:project].city.cost }
         expect(reimbursement_rates).to eq %w[LOW LOW LOW HIGH HIGH HIGH HIGH]
       end
 
-      it 'each date has an associated city with a Low or High reimbursement rate' do
+      it 'each unique date has a reimbursement rate' do
         expect(itinerary.reimbursements).to eq [45, 75, 45, 55, 85, 85, 55]
       end
     end
@@ -124,12 +124,12 @@ describe Itinerary do
         expect(itinerary.to_s).to eq ['2015-09-01', '2015-09-01', '2015-09-02', '2015-09-02', '2015-09-03']
       end
 
-      it 'each date has an associated city with a Low or High reimbursement rate' do
+      it 'each unique date has a reimbursement rate' do
         reimbursement_rates = itinerary.days.map { |day| day[:project].city.cost }
         expect(reimbursement_rates).to eq %w[LOW LOW HIGH HIGH HIGH]
       end
 
-      it 'each date has an associated city with a Low or High reimbursement rate' do
+      it 'each unique date has a reimbursement rate' do
         expect(itinerary.reimbursements).to eq [45, 85, 55]
       end
     end
