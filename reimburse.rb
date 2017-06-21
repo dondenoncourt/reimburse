@@ -42,6 +42,10 @@ class Itinerary
     build_days
   end
 
+  def to_s
+    days.map{|day| day[:date].to_s}
+  end
+
   private
 
   def build_days

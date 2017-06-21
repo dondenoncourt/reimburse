@@ -6,12 +6,15 @@ describe Itinerary do
   let(:high) { City.new('New York', 'HIGH') }
 
   let(:project1_set1) { Project.new('Project 1', low, Date.new(2015,9,1), Date.new(2015,9,3)) }
+
   let(:project1_set2) { Project.new('Project 1', low, Date.new(2015,9,1), Date.new(2015,9,1)) }
   let(:project2_set2) { Project.new('Project 2', high, Date.new(2015,9,2), Date.new(2015,9,6)) }
   let(:project3_set2) { Project.new('Project 3', low, Date.new(2015,9,6), Date.new(2015,9,8)) }
+
   let(:project1_set3) { Project.new('Project 1', low, Date.new(2015,9,1), Date.new(2015,9,3)) }
   let(:project2_set3) { Project.new('Project 2', high, Date.new(2015,9,5), Date.new(2015,9,7)) }
   let(:project3_set3) { Project.new('Project 3', high, Date.new(2015,9,8), Date.new(2015,9,8)) }
+
   let(:project1_set4) { Project.new('Project 1', low, Date.new(2015,9,1), Date.new(2015,9,1)) }
   let(:project2_set4) { Project.new('Project 2', low, Date.new(2015,9,1), Date.new(2015,9,1)) }
   let(:project3_set4) { Project.new('Project 3', high, Date.new(2015,9,2), Date.new(2015,9,2)) }
@@ -42,9 +45,21 @@ describe Itinerary do
       expect(itinerary.days.count).to eq 7
     end
 
-    it 'has 5 days in set 4' do
-      itinerary = Itinerary.new([project1_set4, project2_set4, project3_set4, project4_set4])
-      expect(itinerary.days.count).to eq 5
+    context 'Set 4' do
+      let(:itinerary) { Itinerary.new([project1_set4, project2_set4, project3_set4, project4_set4]) }
+
+      it 'has 5 days' do
+        expect(itinerary.days.count).to eq 5
+      end
+
+      it 'has 5 specific dates' do
+        expect(itinerary.to_s).to eq ["2015-09-01", "2015-09-01", "2015-09-02", "2015-09-02", "2015-09-03"]
+      end
+
+      it 'each date has an associated city with a Low or High reimbursement rate' do
+        reimbursement_rates = itinerary.days.map{|day| day[:project].city.cost}
+        expect(reimbursement_rates).to eq ["LOW", "LOW", "HIGH", "HIGH", "HIGH"]
+      end
     end
   end
 
