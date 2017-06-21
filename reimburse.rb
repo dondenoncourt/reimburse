@@ -35,10 +35,11 @@
 class Project
   attr_reader :name, :start_date, :end_date
 
-  def initialize(name, start_date, end_date)
+  def initialize(name, city, start_date, end_date)
     @name = name
     @start_date = start_date
     @end_date = end_date
+    @city = city
   end
 end
 
@@ -55,7 +56,8 @@ end
 require 'date'
 
 describe Project do
-  let(:project) { Project.new('one', Date.today-30, Date.today+30) }
+  let(:city) { City.new('New York', 'HIGH') }
+  let(:project) { Project.new('one', city, Date.today-30, Date.today+30) }
 
   it 'start_date is accessible' do
     expect(project.start_date).to eq Date.today-30
@@ -67,6 +69,10 @@ describe Project do
 
   it 'name is "one"' do
     expect(project.name).to eq 'one'
+  end
+
+  it 'has a City' do
+    expect(project.city.name).to eq 'New York'
   end
 end
 
