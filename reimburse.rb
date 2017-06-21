@@ -32,14 +32,24 @@
 #   Project 4: High Cost City Start Date: 9/2/15 End Date: 9/3/15
 #
 
+require 'forwardable'
+
 class Project
-  attr_reader :name, :start_date, :end_date
+  extend Forwardable
+
+  attr_reader :name, :start_date, :end_date, :city
+
+  def_delegators :@city, :cost
 
   def initialize(name, city, start_date, end_date)
     @name = name
     @start_date = start_date
     @end_date = end_date
     @city = city
+  end
+
+  def city_name
+    city.name
   end
 end
 
@@ -72,7 +82,7 @@ describe Project do
   end
 
   it 'has a City' do
-    expect(project.city.name).to eq 'New York'
+    expect(project.city_name).to eq 'New York'
   end
 end
 
