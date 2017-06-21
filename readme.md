@@ -31,3 +31,9 @@
   * Project 2: Low Cost City Start Date: 9/1/15 End Date: 9/1/15
   * Project 3: High Cost City Start Date: 9/2/15 End Date: 9/2/15
   * Project 4: High Cost City Start Date: 9/2/15 End Date: 9/3/15
+
+### Implementation strategy
+
+I used basic Ruby. I could have used Rails and created models for Project, City, and Itinerary. With Rails migrations and then populate with seeds. And the retrieval of Projects into Itineraries via ActiveRecord queries versus manual population with initialize. But that would have been overkill and very noisy. Then too, had I done that, I couldn't have stopped myself from doing an HTML-based invoice if not a Prawn PDF and that would get crazy.
+
+I also slapped all the classes into one file. This is not something I normally do but, for the purposes of this exercise, with mini-classes, it was easier to write and easier to read with them all in one file. I certainly used TDD for this project because I needed feedback on what I was writing. If you look at the git history you can see my developmental process as there are a dozen commits.
