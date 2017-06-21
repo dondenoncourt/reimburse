@@ -36,7 +36,8 @@ class City
 end
 
 class Itinerary
-  attr_accessor :projects, :days, :reimbursements
+  attr_accessor :projects
+  attr_reader :days, :reimbursements
 
   def initialize(projects = [])
     @projects = projects
@@ -46,6 +47,10 @@ class Itinerary
 
   def to_s
     days.map { |day| day[:date].to_s }
+  end
+
+  def reimbursement
+    @reimbursements.inject(0){ |sum, x| sum + x }
   end
 
   private

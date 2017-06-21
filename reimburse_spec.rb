@@ -48,6 +48,10 @@ describe Itinerary do
     context 'Set 1' do
       let(:itinerary) { Itinerary.new([project1_set1]) }
 
+      it 'calculates the correct reimbursement' do
+        expect(itinerary.reimbursement).to eq 165
+      end
+
       it 'has 3 specific dates' do
         expect(itinerary.to_s).to eq ['2015-09-01', '2015-09-02', '2015-09-03']
       end
@@ -64,6 +68,10 @@ describe Itinerary do
 
     context 'Set 2' do
       let(:itinerary) { Itinerary.new([project1_set2, project2_set2, project3_set2]) }
+
+      it 'calculates the correct reimbursement' do
+        expect(itinerary.reimbursement).to eq 590
+      end
 
       it 'has 9 specific dates' do
         expect(itinerary.to_s).to eq(
@@ -85,6 +93,10 @@ describe Itinerary do
     context 'Set 3' do
       let(:itinerary) { Itinerary.new([project1_set3, project2_set3, project3_set3]) }
 
+      it 'calculates the correct reimbursement' do
+        expect(itinerary.reimbursement).to eq 445
+      end
+
       it 'has 7 specific dates' do
         expect(itinerary.to_s).to eq(
           ['2015-09-01', '2015-09-02', '2015-09-03', '2015-09-05', '2015-09-06', '2015-09-07', '2015-09-08']
@@ -103,6 +115,10 @@ describe Itinerary do
 
     context 'Set 4' do
       let(:itinerary) { Itinerary.new([project1_set4, project2_set4, project3_set4, project4_set4]) }
+
+      it 'calculates the correct reimbursement' do
+        expect(itinerary.reimbursement).to eq 185
+      end
 
       it 'has 5 specific dates' do
         expect(itinerary.to_s).to eq ['2015-09-01', '2015-09-01', '2015-09-02', '2015-09-02', '2015-09-03']
