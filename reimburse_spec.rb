@@ -97,7 +97,7 @@ describe Itinerary do
       end
 
       it 'each date has an associated city with a Low or High reimbursement rate' do
-        expect(itinerary.reimbursements).to eq [45, 75, 75, 55, 85, 85, 55]
+        expect(itinerary.reimbursements).to eq [45, 75, 45, 55, 85, 85, 55]
       end
     end
 

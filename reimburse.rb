@@ -83,7 +83,7 @@ class Itinerary
   def gap(date, index)
     return false if first_day(index) || last_day(index)
     gap_before = (date[:date] - @days[index - 1][:date]).to_i > 1
-    gap_after = (@days[index - 1][:date] - date[:date]).to_i > 1
+    gap_after = (@days[index + 1][:date] - date[:date]).to_i > 1
     gap_before || gap_after ? true : false
   end
 
