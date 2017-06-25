@@ -20,6 +20,10 @@ describe Itinerary do
   let(:project3_set4) { Project.new('Project 3', high, Date.new(2015, 9, 2), Date.new(2015, 9, 2)) }
   let(:project4_set4) { Project.new('Project 4', high, Date.new(2015, 9, 2), Date.new(2015, 9, 3)) }
 
+  let(:project1_set5) { Project.new('Project 1', low, Date.new(2015, 9, 1), Date.new(2015, 9, 1)) }
+  let(:project2_set5) { Project.new('Project 2', high, Date.new(2015, 9, 1), Date.new(2015, 9, 1)) }
+  let(:project3_set5) { Project.new('Project 3', low, Date.new(2015, 9, 3), Date.new(2015, 9, 4)) }
+
   describe Itinerary do
     it 'builds an iterary for Set 4' do
       itinerary = Itinerary.new([project1_set4, project2_set4, project3_set4, project4_set4])
@@ -133,6 +137,27 @@ describe Itinerary do
         expect(itinerary.reimbursements).to eq [45, 85, 55]
       end
     end
+
+    context 'Set 5' do
+      let(:itinerary) { Itinerary.new([project1_set5, project2_set5, project3_set5]) }
+
+      it 'calculates the correct reimbursement' do
+        expect(itinerary.reimbursement).to eq 135
+      end
+
+      it 'has 5 specific dates' do
+        expect(itinerary.to_s).to eq ["2015-09-01", "2015-09-01", "2015-09-03", "2015-09-04"]
+      end
+
+      it 'each unique date has a reimbursement rate' do
+        reimbursement_rates = itinerary.days.map { |day| day[:project].city.cost }
+        expect(reimbursement_rates).to eq %w[LOW HIGH LOW LOW]
+      end
+
+      it 'each unique date has a reimbursement rate' do
+        expect(itinerary.reimbursements).to eq [45, 45, 45]
+      end
+    end
   end
 
   describe Project do
@@ -187,6 +212,15 @@ describe Itinerary do
           expect(projects[1].to_s).to eq 'Project 2: Low Cost City Start Date: 9/1/15 End Date: 9/1/15'
           expect(projects[2].to_s).to eq 'Project 3: High Cost City Start Date: 9/2/15 End Date: 9/2/15'
           expect(projects[3].to_s).to eq 'Project 4: High Cost City Start Date: 9/2/15 End Date: 9/3/15'
+        end
+      end
+
+      context 'Set 5' do
+        it 'builds five projects' do
+          projects = [project1_set5, project2_set5, project3_set5]
+          expect(projects[0].to_s).to eq 'Project 1: Low Cost City Start Date: 9/1/15 End Date: 9/1/15'
+          expect(projects[1].to_s).to eq 'Project 2: High Cost City Start Date: 9/1/15 End Date: 9/1/15'
+          expect(projects[2].to_s).to eq 'Project 3: Low Cost City Start Date: 9/3/15 End Date: 9/4/15'
         end
       end
     end

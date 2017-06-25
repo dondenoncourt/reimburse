@@ -67,36 +67,36 @@ class Itinerary
   def build_reimbursements
     @reimbursements = []
     @days.each_with_index do |date, index|
-      if first_day(index)
+      if first_day?(index)
         @reimbursements << travel_day_cost(date)
-      elsif last_day(index)
-        @reimbursements << travel_day_cost(date)
-      elsif gap(date, index)
-        @reimbursements << travel_day_cost(date)
-      elsif day_already_processed(date, index)
+      elsif day_already_processed?(date, index)
         next
+      elsif last_day?(index)
+        @reimbursements << travel_day_cost(date)
+      elsif gap?(date, index)
+        @reimbursements << travel_day_cost(date)
       else
         @reimbursements << full_day_cost(date)
       end
     end
   end
 
-  def day_already_processed(date, index)
+  def day_already_processed?(date, index)
     date[:date] == @days[index - 1][:date]
   end
 
-  def gap(date, index)
-    return false if first_day(index) || last_day(index)
+  def gap?(date, index)
+    return false if first_day?(index) || last_day?(index)
     gap_before = (date[:date] - @days[index - 1][:date]).to_i > 1
     gap_after = (@days[index + 1][:date] - date[:date]).to_i > 1
     gap_before || gap_after ? true : false
   end
 
-  def first_day(index)
+  def first_day?(index)
     index.zero?
   end
 
-  def last_day(index)
+  def last_day?(index)
     @days.count == index + 1
   end
 
